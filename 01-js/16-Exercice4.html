@@ -22,7 +22,7 @@ Considérons un Tableau JS contenant une liste de membre.
 ---------
 ETAPE 1 : Lors de la saisie d'un Pseudo, vérifiez en temps réel grâce aux évènements que celui-ci n'existe pas dans le tableau de membre.
 Si le Pseudo existe dans le tableau Membre, la notification pseudoError doit s'afficher et le bouton "submit" être désactivé.
-A l'inverse, si le Pseudo n'existe pas dans le tableau Membre, ou que l'utilisateur à corriger son Pseudo, alors, le bouton est actif et la notification pseudoError ne s'affiche pas / plus.
+A l'inverse, si le Pseudo n'existe pas dans le tableau Membre, ou que l'utilisateur a corrigé son Pseudo, alors, le bouton est actif et la notification pseudoError ne s'affiche pas / plus.
 ---------
 ETAPE 2 : L'inscription n'est possible qu'aux personnes majeurs de 18 ans.
 Vous devez donc vérifier que l'age saisi est bien supérieur ou égale à 18 ans.
@@ -57,12 +57,12 @@ Lors de la saisie du Pseudo, vous devrez afficher en temps réel dans le titre i
     <h3 id="Bienvenue"></h3>
     <!-- Emmet : form>(input[type=text][id=$])*5 -->
     <form method="get" action="inscription.php" id="InscriptionForm">
-        <input type="text"  value="TheWarriorMaster"  id="pseudo"  placeholder="Choisissez un Pseudo"><br />
+        <input type="text"  value="Maxime"  id="pseudo"  placeholder="Choisissez un Pseudo"><br />
         <div class="pseudoError">Ce pseudo est déjà pris.</div><br />
-        <input type="text" value="22" id="age" placeholder="Quel est votre Age ?"><br />
+        <input type="text" value="25" id="age" placeholder="Quel est votre Age ?"><br />
         <div class="ageError">Vous devez avoir au moins 18 ans pour vous inscrire.</div><br />
-        <input value="thewarriormaster@gmail.com" type="email" id="email" placeholder="Quel est votre Email ?"><br /><br />
-        <input value="thisismypassword" type="password" id="mdp" placeholder="****"><br /><br />
+        <input value="Max@test" type="email" id="email" placeholder="Quel est votre Email ?"><br /><br />
+        <input value="test" type="password" id="mdp" placeholder="****"><br /><br />
         <input type="submit" id="submit" value="M'inscrire">
     </form>
     
@@ -73,6 +73,7 @@ Lors de la saisie du Pseudo, vous devrez afficher en temps réel dans le titre i
           {'pseudo':'James','age':78,'email':'james@hl-media.fr','mdp':'james8862'},
           {'pseudo':'Emilio','age':18,'email':'milio@hl-media.fr','mdp':'milioDu62'}
         ];    
+
     </script>
 
     <script src="./assets/js/16-exercice4.js"></script>
