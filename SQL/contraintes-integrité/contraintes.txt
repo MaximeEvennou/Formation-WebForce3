@@ -1,0 +1,25 @@
+CONTRAINTES D'INTEGRITE
+4 contraintes existantes :
+- CASCADE
+- SET NULL
+- RESTRICT
+- NO ACTION
+
+En CASCADE :
+Suppression : Si je supprime un fournisseur en contrainte CASCADE, 
+tous les articles qui lui sont associés seront supprimés également.
+
+Modification : Si je modifie un fournisseur en contraint CASCADE, 
+tous les produits associés seront modifiés également.
+
+En SET NULL : (ne pas oublier de déclarer que les champs acceptent
+les valeurs NULL.)
+Suppression : Si je supprime un fournisseur en contrainte SET NULL, 
+tous les articles qui lui sont associés auront une valeur de NULL. 
+
+Modification : Si je supprime un fournisseur en contrainte SET NULL, 
+tous les produits associés modifiés auront une valeur de NULL.
+
+En RESTRICT et NO ACTION :
+Modification et suppression : Il sera impossible de modifier ou supprimer
+un fournisseur si des articles lui sont associés.
