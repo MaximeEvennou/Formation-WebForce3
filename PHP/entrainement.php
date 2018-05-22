@@ -315,8 +315,274 @@ function bonjour($qui = 'Jean-Christophe') // $qui ne sort pas de nulle part. Ce
     return "Bonjour $qui <br>"; // return retourne le résultat de la fonction
 }
 
-$prenom = 'Greg';
+$prenom = 'Maxime';
 
-echo bonjour('Maxime'); // Si la fonction reçoit un argument, il faut lui envoyer  un argument 
+echo bonjour('Greg'); // Si la fonction reçoit un argument, il faut lui envoyer  un argument 
 echo bonjour($prenom); // Quand il y a un "return" dans la fonction, il faut faire un 'echo' avant, l'argument peut être une variable
 echo bonjour(); // Si l'argument a une valeur par défaut, il n'est pas nécessaire d'en envoyer à l'exécution
+echo bonjour('Julien'); // On écrase la valeur par défaut de la variable de réception $qui
+
+// ---------------------------------------------------------------------------
+function appliqueTva($nombre)
+{
+    return $nombre*1.2; // 1.2 est le coefficient du taux de TVA de 20%
+}
+
+echo "500 euros avec TVA de 20% : " . appliqueTva(500) . '<br>';
+
+// Exo : Pourriez-vous améliorer cette fonction afin que l'on puisse calculer un nombre avec les taux de notre choix ? Si oui, faites le.
+
+function appliqueTva2($nombre, $taux)
+{
+    return $nombre*(1+$taux/100);
+}
+
+echo "500 € avec TVA de 10%  : " . appliqueTva2(500, 10) . '<br>';
+echo "500 € avec TVA de 19.6%  : " . appliqueTva2(500, 19.6) . '<br>';
+echo "500 € avec TVA de 5.5%  : " . appliqueTva2(500, 5.5) . '<br>';
+echo "500 € avec TVA de 7%  : " . appliqueTva2(500, 7) . '<br>';
+// /!\ Une fonction ne peut pas être déclarée deux fois avec le même nom !
+
+// ---------------------------------------------------------------------------
+meteo('printemps', 19); // Il est possible d'exécuter une fonction avant de l'avoir déclarée
+function meteo($saison, $temperature)
+{
+    echo "Nous sommes au $saison et il fait $temperature degré(s) <br>";
+}
+
+// Exo : Gérer le S de degréS avec des if/else
+function exoMeteo($saison, $temperature)
+{   
+    // gérer la phrase en fonction de la saison ex : au printemps, en hiver
+    if($saison == 'printemps')
+    {
+        $texte = 'au';
+    }
+    else{
+        $texte = 'en';
+    }
+
+    echo "Nous sommes $texte $saison et il fait $temperature ";
+    
+    if($temperature > 1 || $temperature < -1)
+    {
+        echo 'degrés <br>';
+    }
+    else 
+    {
+        echo 'degré <br>'; 
+    }
+}
+
+exoMeteo('printemps', 0);
+exoMeteo('hiver', 1);
+exoMeteo('été', -1);
+exoMeteo('printemps', 2);
+exoMeteo('printemps', -2);
+echo '<hr>';
+
+// ---------------------------------------------------------------------------
+// Lorsqu'on travaille à l'intérieur d'une fonction, on se trouve dans l'espace local, tout le reste, c'est-à-dire en dehors d'une foction, s'appele l'espace global (espace par défaut)
+function jourSemaine()
+{
+    $jour = 'mardi'; // variable déclarée en local
+    return $jour; // une fonction peut retourner quelque chose, on retourne le résultat de la fonction (à ce moment là on quitte la fonction)
+    echo 'ALLO!!'; // cette ligne ne sortira pas car il y a un return avant
+}
+
+echo jourSemaine() . '<br>'; // exécution de la fonction
+
+echo $jour; // /!\ génère une erreur, ne fonctionne pas car cette variable n'est connu qu'à l'intérieur de la fonction
+
+$recup = jourSemaine(); // on récupère 
+echo $recup . '<br>'; // on affiche
+echo '<hr>';
+
+// ---------------------------------------------------------------------------
+$pays = 'France'; // Variable déclarrée dans l'espace global
+
+function affichagePays()
+{
+    global $pays; // Le echo qui suit ne fonctionnerait pas si nous n'avions pas mit le mot-clé 'global' pour importer tout ce qui est déclaré de l'espace global dans l'espace local.
+    echo $pays;
+}
+
+affichagePays();
+echo '<br>';
+
+// ---------------------------------------------------------------------------
+// /!\ php 7    On précise en amont le type obligatoire des valeurs entrantes dans les arguments
+function identite(string $nom, int $age)
+{
+    return $nom . ' a ' . $age . ' ans<br>';
+}
+
+echo identite('Evennou', 25);
+
+echo '<h2>Structure itérative : boucles</h2>';
+
+// Boucle WHILE
+$i = 0;
+while($i < 3)
+{
+    echo "$i---";
+    $i++; // incrémentation, équivaut à $i = $i + 1
+}
+// affiche : 0---1---2---
+
+echo '<br>';
+// Exo : Faites en sorte de ne pas avoir les tirets à la fin
+$i = 0;
+while($i < 3)
+{
+    if($i == 2) // On ne rentre qu'une seule fois ici
+    {
+        echo $i;
+    }
+    else{
+        echo "$i---";
+    }
+    $i++;
+}
+echo '<br>';
+
+// ---------------------------------------------------------------------------
+// Boucle FOR
+for($i = 0; $i < 16; $i++) // Valeur de départ; condition d'entrée, sens (incrémentation)
+{
+    echo $i . ' ';
+}
+
+echo '<br>';
+// Exo : Afficher 30 options via une boucle
+echo '<select>';
+    for($i = 1; $i <= 30; $i++)
+    {
+        echo "<option>$i</option>";
+     // echo '<option>' . $i . '</option>';
+    }
+echo '<select><br>';
+
+// ---------------------------------------------------------------------------
+// Exo : Faites une boucle qui affiche de 0 à 9 sur la même ligne (soit 10 tours) dans un tableau HTML
+
+echo '<table border = 1>'; // déclaration du tableau
+    echo '<tr>'; // déclaration d'une ligne
+    for($i = 0; $i <= 9; $i++)
+    {
+    echo "<td>$i</td>"; // déclaration d'une cellule
+    }
+    echo '</tr>';
+echo '</table><br>';
+
+// ---------------------------------------------------------------------------
+// Exo : Faire la même chose en allant de 0 à 99 sur plusieurs sans faire 10 boucles.
+
+$z = 0;
+
+echo '<table border = 1>'; 
+    for($ligne = 0; $ligne < 10; $ligne++)
+    {
+    echo '<tr>';
+    for($cellule = 0; $cellule < 10; $cellule++) // Tant que ligne est à 0, cellule s'incrémente 10 fois, ligne est à 1, cellule s'incrémente 10 fois, etc...
+        {
+            echo "<td>$z</td>"; // compteur qui s'incrémente à chaque tour de boucle et ne revient pas à 0
+            $z++;
+        }
+    echo '</tr>';
+    }
+echo '</table><br>';
+// Un tour de boucle for() entraîne 10 tours de la 2ème
+
+// OU
+
+echo '<table border = 1>'; 
+    for($ligne = 0; $ligne < 10; $ligne++)
+    {
+    echo '<tr>';
+    for($cellule = 0; $cellule< 10; $cellule++)
+        {
+            echo '<td>' . (10 * $ligne + $cellule) . '</td>';
+        }
+    echo '</tr>';
+    }
+echo '</table><br>';
+
+echo '<h2>Tableau de données ARRAY</h2>';
+// Un tableau est déclarée un peu à la manière d'une variable améliorée, car on ne conserve pas une valeur mais un ensemble de valeur.
+
+$liste = array("Maxime", "Grégory", "Julien", "Jean-Christophe");
+
+echo $liste; // /!\ Attention erreur, il est impossible d'afficher un tableau ARRAY avec une instruction d'affichage
+
+// Les instructions d'affichage améliorées permettent de debuger et de contrôler les données, ce n'est pas un affichage conventionnel, l'internaute n'est pas censé voir le rendu du print_r ou du var_dump
+echo '<pre>';var_dump($liste); echo '</pre>';
+
+echo '<pre>';print_r($liste); echo '</pre>'; // La balise <pre> permet de formater le texte, cela nous permet de mettre en forme la sortie du print_r ou du var_dump
+
+echo '<h2>Boucle FOREACH pour les tableaux de données ARRAY</h2>';
+
+$tab[] = "France"; // Autre moyen de créer et d'affecter une valeur à un tableau ARRAY, nous ne mettons pas le mot ARRAY mais les crochets [] qui permettent de générer des indices numériques
+$tab[] = "Brésil";
+$tab[] = "Espagne";
+$tab[] = "Allemagne";
+$tab[] = "Argentine";
+echo '<pre>';print_r($tab); echo '</pre>';
+
+// Exo : Tenter de sortir "Argentine" en passant par le tableau ARRAY sans faire un 'echo Argentine'
+echo $tab[4] . '<hr>';
+
+// foreach est un moyen simple de passer en revue un tableau. Foreach fonctionne uniquement avec les tableaux et les objets.
+
+// 1er argument : le tableau à parcourir
+foreach($tab as $info) // Le mot AS fait parti du langage et est obligatoire. $info est une variable de réception qui vient parcourir la colonne des valeurs du tableau de données ARRAY
+{
+    echo $info . '<br>';
+}
+
+echo '<hr>';
+
+foreach($tab as $indice => $info) // Quand il y a 2 variables, la première parcoure la colonne des indices et la seconde, la colonne des valeurs.
+{
+    echo $indice . ' => ' . $info . '<br>'; // On affiche successivement les éléments du tableau
+}
+
+echo '<hr>';
+
+// Il est possible de délimiter foreach, ou même if avec un double point ':' et "endforeach" ou "endif"
+foreach($tab as $indice => $info):
+    echo $indice . ' => ' . $info . '<br>';
+endforeach;
+
+// Nous pouvons définir les indices :
+$couleur = array("j" => "jaune", "v" => "vert", "b" => "bleu", "o" => "orange");
+echo '<pre>';print_r($couleur); echo '</pre>';
+
+// count et sizeof retournent le nombre d'éléments présents dans le tableau de données, il n'y a pas de différences entre les deux.
+echo 'Taille du tableau ' . count($couleur) . '<br>';
+echo 'Taille du tableau ' . sizeof($couleur) . '<br>';
+
+echo implode(" / ", $couleur) . '<br>'; // implode() est une fonction prédéfinie qui rassemble les éléments d'un tableau en une chaîne (séparée par un symbole)
+
+echo '<h2>Tableau multidimensionnel</h2>';
+// On parle de tableaux multidimensionnels quand un tableau est contenu dans un autre tableau
+$tab_multi = array(
+
+    0 => array("prenom" => "Grégory", "nom" => "Lacroix"),
+    1 => array("prenom" => "Emmanuel", "nom" => "Macron")
+);
+
+echo '<pre>';print_r($tab_multi); echo '</pre>';
+
+// Exo : Tenter de sortir "Macron" en passant par le tableau multi sans faire de 'echo Macron'
+echo $tab_multi[1]['nom'] . '<br>';
+
+// Exo : Afficher successivement les éléments du tableau avec des boucles foreach
+foreach($tab_multi as $indice => $tableau)
+{
+    foreach($tableau as $key => $value)
+    {
+    echo $key . ' => ' . $value . '<br>';
+    }
+    echo '<hr>';   
+}
