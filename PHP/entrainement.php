@@ -142,11 +142,11 @@ if(isset($var2))
 $a = 10; $b = 5; $c = 2;
 if($a > $b) // Si A est supérieur à B
 {
-    echo 'A est bien supérieur à B';
+    echo 'A est bien supérieur à B<br>';
 }
 else // Sinon... cas par défaut, dans tous les autres cas
 {
-    echo 'Non c\'est B qui est supérieur à A';
+    echo 'Non c\'est B qui est supérieur à A<br>';
 }
 
 // ---------------------------------------------------------------------------
@@ -165,3 +165,158 @@ OPERATEUR DE COMPARAISON
 !       n'est pas
 !=      différent de
 OR  ||  OU
+XOR ||  ou exclusif
+AND && ET
+*/
+$a = 10; $b = 5; $c = 2;
+
+if($a == 8)
+{
+    echo '1 - A est égale à 8<br>';
+}
+elseif($a != 10)
+{
+    echo '2 - A est différent de 10<br>';
+}
+else
+{
+    echo '3 - Tout le monde a faux<br>';
+}
+
+// Grâce au ELSEIF, si la condition est respéctée, toutes les autres conditions ne seront pas évaluées.
+
+// ---------------------------------------------------------------------------
+if($a == 10 XOR $b == 6)
+{
+    echo 'ok condition exclusive<br>'; // Si les 2 conditions sont bonnes ou mauvaises, on ne rentre pas ici
+}
+
+// ---------------------------------------------------------------------------
+// Forme contractée : 2ème possibilité d'écriture des if
+echo ($a == 10) ? "a est égale à 10<br>" : "a n'est pas égale à 10<br>";
+// Le ? remplace le IF
+// Le ':' remplace le ELSE
+
+// ---------------------------------------------------------------------------
+// comparaison
+$vara = 1;
+$varb = '1';
+if($vara == $varb)
+{
+    echo 'il s\'agit de la même chose';
+}
+
+// Avec le double == le test fonctionne puisque la valeur est la même
+// Avec le triple === le test ne fonctionne pas puisque la valeur est la même mais le type est différent
+// == comparaison de la valeur
+// === comparaison de la valeur et du type
+
+echo '<h2>Condition Switch</h2>';
+// les 'case' représentent les cas différents dans lesquels nous pouvons potentiellement tomber
+
+$couleur = 'jaune';
+
+switch($couleur)
+{
+    case 'bleu':
+    echo 'Vous aimez le bleu';
+    break; // permet de stopper le script si nous entrons dans un des cas
+
+    case 'vert':
+    echo 'Vous aimez le vert';
+    break;
+
+    case 'rouge':
+    echo 'Vous aimez le rouge';
+    break;
+
+    default: // Cas par défaut, si on entre pas dans les cas précédents
+    echo 'Vous n\'aimez rien <br>';
+}
+
+// Exo : Pouvez-vous faire la même chose que le switch avec des if/else ? Si oui, faites le
+
+$couleur = 'jaune';
+
+if($couleur == 'bleu')
+    echo 'Vous aimez le bleu';
+elseif($couleur == 'vert')
+    echo 'Vous aimez le vert';
+elseif($couleur == 'rouge')
+    echo 'Vous aimez le rouge';
+else 
+    echo 'Vous n\'aimez rien <br>';
+
+// Si dans la condition IF, il n'y a qu'une seule instruction d'affichage, les accolades ne sont pas nécessaires.
+
+echo '<h2>Fonctions prédéfinies</h2>';
+
+// Une fonction prédéfinie permet de réaliser un traitement spécifique, il en existe une liste assez conséquente
+
+echo 'Date : ' . date("d/m/Y") . '<br>';
+// Lorsqu'on utilise une fonction prédéfinie, il faut se poser la question de savoir quels arguments on doit lui envoyer et surtout savoir ce qu'elle retourne, il est important de consulter la documentation (www.php.net)
+
+echo '<h2>Fonctions prédéfinies : Traitement de chaînes (iconv_strlent, strpos, substr</h2>';
+
+$email1 = 'maxime.evennou0406@gmail.com';
+echo strpos($email1, '@') . '<br>'; // Indique la position 18 du caractère '@' dans la chaîne (18 et non pas pas 19 car cela commence à 0).
+
+// strpos() est une fonction prédéfinie qui retourne la position d'un caractère dans une chaîne de caractères
+// Contexte : Nous pourrions l'utiliser pour savoir si une adresse email a un format conforme.
+
+$email2 = 'bonjour';
+echo strpos($email2, '@') . '<br>'; // Cette ligne ne sort rien, pourtant il y a bien quelque chose à l'intérieur : FALSE !
+var_dump(strpos($email2, '@')); // Grâce au var_dump(), on aperçoit le FALSE si le caractère '@' n'est pas trouvé. var_dump() est donc une instruction d'affichage améliorée que l'on utilise souvent en phase de développement.
+print_r(strpos($email2, '@')); // print_r est une autre instruction d'affichage améliorée, qui retourne moins d'informations.
+
+// ---------------------------------------------------------------------------
+$phrase = "Nous sommes Mardi et j'ai faim!!";
+echo iconv_strlen($phrase) . '<br>';
+// Il existe aussi la fonction strlen() qui calcule la taille d'une chaîne en octet
+var_dump(iconv_strlen($phrase));
+// iconv_strlen() est une fonction prédéfinie qui retourne la taille d'une chaîne de caractères
+// succès : INT
+// echec : boolean FALSE
+// Contexte : Nous pourrons l'utiliser pour savoir si le pseudo et le mdp lors d'une instruction ont des tailles conformes.
+echo '<br>';
+
+// ---------------------------------------------------------------------------
+$texte = 'Tu autem, Fanni, quod mihi tantum tribui dicis quantum ego nec adgnosco nec postulo, facis amice; sed, ut mihi videris, non recte iudicas de Catone; aut enim nemo, quod quidem magis credo, aut si quisquam, ille sapiens fuit. Quo modo, ut alia omittam, mortem filii tulit! memineram Paulum, videram Galum, sed hi in pueris, Cato in perfecto et spectato viro.';
+
+echo substr($texte, 0, 20) . "<a href='#'>...lire la suite</a><br>";
+
+/* substr() est une fonction prédéfinie permettant de retourner une partie de la chaîne
+- Succès : string
+- Echec : boolean FALSE
+Arguments :
+1. La chaîne que l'on souhaite couper
+2. La position de début
+3.La position de fin, le nom de caractères souhaité
+
+Contexte : substr() est souvent utilisé pour afficher des actualités avec une "accroche". 
+*/
+
+echo '<h2>Fonctions utilisateur</h2>';
+// Les fonctions utilisateur ne sont pas prédéfinies dans le langage, elles sont déclarées puis exécutées par l'utilisateur.
+// Une fonction se déclare toujours avec le mot clé 'function' suivi du nom de la fonction que nous définissons : pas d'accent, pas d'espace.
+
+function separation() // déclaration d'une fonction prévue pour ne pas recevoir d'arguments
+{
+    echo '<hr><hr><hr>'; 
+}
+
+separation(); // exécution de la fonction
+
+// ---------------------------------------------------------------------------
+// fonction avec arguments :
+// On peut définir une variable par défaut aux variables de réception
+function bonjour($qui = 'Jean-Christophe') // $qui ne sort pas de nulle part. Cela permet de recevoir un argument, il s'agit d'une variable de réception
+{
+    return "Bonjour $qui <br>"; // return retourne le résultat de la fonction
+}
+
+$prenom = 'Greg';
+
+echo bonjour('Maxime'); // Si la fonction reçoit un argument, il faut lui envoyer  un argument 
+echo bonjour($prenom); // Quand il y a un "return" dans la fonction, il faut faire un 'echo' avant, l'argument peut être une variable
+echo bonjour(); // Si l'argument a une valeur par défaut, il n'est pas nécessaire d'en envoyer à l'exécution
