@@ -1,5 +1,6 @@
 <style>
-    h2{margin: 0; background: grey; padding: 10px; text-align: center;}
+    body{background: #202020; color: white;}
+    h2{margin: 0 100 0 100px; background: silver; padding: 10px; text-align: center; color: black;}
 </style>
 <h2>Ecriture et affichage</h2> <!-- Nous pouvons écrire du HTML dans un fichier PHP, l'inverse n'est pas possible -->
 
@@ -578,11 +579,27 @@ echo '<pre>';print_r($tab_multi); echo '</pre>';
 echo $tab_multi[1]['nom'] . '<br>';
 
 // Exo : Afficher successivement les éléments du tableau avec des boucles foreach
-foreach($tab_multi as $indice => $tableau)
+foreach($tab_multi as $indice => $tableau) // Pour chaque tour de boucle, $tableau possède un tableau ARRAY
 {
-    foreach($tableau as $key => $value)
+    foreach($tableau as $key => $value) // La 2ème boucle permet de passer en revue chaque tableau ARRAY
     {
-    echo $key . ' => ' . $value . '<br>';
+    echo $key . ' => ' . $value . '<br>'; // On affiche successivement les données
     }
     echo '<hr>';   
 }
+
+echo '<h2>Les superglobales</h2>';
+// Les superglobales sont des variables de type ARRAY qui sont prédéfinies dans le code PHP, elles sont accessibles partout, dans l'espace local et global.
+// Elles s'écrivent toujours avec le signe '$' suivi d'un '_' et du nom de la superglobale en majuscule.
+// Elles permettent de véhiculer un certain nombre de données.
+
+echo '<pre>';print_r($_SERVER); echo '</pre>';
+
+/*
+$_SERVER : contient les informations liées au serveur
+$_GET : contient les données envoyées dans l'URL
+$_POST : contient les données saisies d'un formulaire
+$_FILES : contient les données d'un fichier uploadé
+$_COOKIE
+$_SESSION
+*/

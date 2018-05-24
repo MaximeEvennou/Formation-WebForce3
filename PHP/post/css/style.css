@@ -1,0 +1,16 @@
+.myfooter{
+    height: 70px;
+    background: #343a40;
+    color: #fff;
+    text-align: center;
+    padding-top: 10px;
+    margin-top: 20px;
+}
+
+.mon-conteneur{
+    min-height: 500px;
+}
+
+h1{
+    padding: 30px;
+}
