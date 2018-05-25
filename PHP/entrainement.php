@@ -603,3 +603,27 @@ $_FILES : contient les données d'un fichier uploadé
 $_COOKIE
 $_SESSION
 */
+
+echo '<h2>Objets</h2>';
+// Un objet est un autre type de données. Un peu à la manière d'un ARRAY, ils permet de regrouper des informations.
+// Cependant, cela va beaucoup plus loin car on peux déclarer des variables (appelées propriétés ou attributs) mais aussi des fonctions (appelées : méthodes)
+
+class Etudiant
+{
+    public $prenom = "Maxime"; // public permet de préciser que l'élément sera accessible de partout (il y a aussi ptrotected et private, utiles en cas d'héritage).
+    public $age = 25;
+    public function pays()
+    {
+        return "France";
+    }
+}
+
+$objet = new Etudiant(); // new est un mot clé permettant d'instancier la classe et d'en faire un objet. C'est ce qui nous permet de la déployer afin que l'on puisse s'en servir. On se sert de ce qui est dans la classe via l'objet !
+
+echo '<pre>'; var_dump($objet); echo '</pre>'; // Nous pouvons observer le type, la référence de l'objet et le nom de la classe dont il est issu
+echo '<pre>'; var_dump(get_class_methods($objet)); echo '</pre>'; // get_class_methods() est une fonction prédéfinie nous permettant d'observer les méthodes issues d'une classe
+
+echo $objet->prenom . '<br>'; // Nous pouvons piocher dans un ARRAY avec les crochets [], nous devons piocher dans un objet avec une flêche ->
+echo $objet->age . '<br>';
+echo $objet->pays() . '<br>'; // Appel d'une méthode avec des parenthèses
+

@@ -1,5 +1,5 @@
 --------- FONCTIONS PREFEFINIES ---------
- SELECT DATABASE(); -- Indique qu'lle BDD est actuellement séléctionnée
+ SELECT DATABASE(); -- Indique qu'elle BDD est actuellement séléctionnée
  SELECT VERSION(); -- Affiche la version de MySQL
  INSERT INTO abonne (prenom) VALUES ('test');
  SELECT LAST_INSERT_ID(); -- Permet d'afficher le dernier identifiant inséré.

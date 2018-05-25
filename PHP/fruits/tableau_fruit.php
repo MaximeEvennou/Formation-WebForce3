@@ -59,7 +59,26 @@ for($i = 0; $i < count($liste); $i++)
     }
     echo '<hr>';
 }
-
+echo '<br>';
+echo '<br>';
+echo '<hr>';
 // Faire un affichage sous forme de tableau HTML avec fruits en entête du tableau
 
+echo "<table border='1'><tr><th>poids</th>";
+    foreach($liste AS $indice_fruit => $fruit)
+    {
+        echo "<th> $fruit </th>";
+    }
+echo '</tr>';
+    foreach($poids AS $poids_fruit)
+    {
+        echo '<tr>';
+            echo "<th> $poids_fruit g </th>";
+            foreach($liste AS $fruit)
+            {
+                echo"<td>" . calcul($fruit, $poids_fruit) . "</td>";
+            }
+            echo '</tr>';
+    }
+    echo "</table>";
 ?>
