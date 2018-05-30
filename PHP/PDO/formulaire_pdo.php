@@ -17,7 +17,6 @@ if(isset($_POST['formulaire1']) && !empty($_POST))
 {
     // Faites en sorte d'informer l'internaute si le nom de famille est déjà existant dans la BDD
     
-
     $resultat = $pdo->exec("INSERT INTO employes VALUES (NULL, '$_POST[prenom]', '$_POST[nom]', '$_POST[sexe]', '$_POST[service]', '$_POST[date_embauche]', '$_POST[salaire]')");
 
     // echo "Nombre d'enregistrement(s) affecté(s) par l'INSERT : " . $resultat . '<br>';
