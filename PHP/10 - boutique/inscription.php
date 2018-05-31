@@ -1,6 +1,12 @@
 <?php
 require_once 'inc/init.php';
 
+if(internauteEstConnecte()) // Si l'internaute est connecté, il n'a rien à faire sur la page 'connexion', on le redirige vers sa page profil
+{
+  header("location:profil.php");
+}
+
+
 /*
     Contrôler les champs suivants :
     - Faites en sorte d'informer l'internaute si le pseudo et l'email sont déjà existants dans la BDD
@@ -18,13 +24,13 @@ if(isset($_POST['formulaire1']))
     $verif_pseudo->execute();
     if($verif_pseudo->rowCount() > 0)
     {
-        $erreur .= '<div class="col-md-6 offset-md-3 alert alert-danger text-center">Pseudo existant! Merci de saisir à nouveau</div>';
+        $erreur .= '<div class="col-md-6 offset-md-3 alert alert-warning text-center">Pseudo existant! Merci de saisir à nouveau</div>';
     }
     else
     {
         if((strlen($_POST['pseudo']) < 2 || strlen($_POST['pseudo']) > 20) || !preg_match('#^[A-Za-z0-9._-]+$#', $_POST['pseudo']))
         {
-            $erreur .= '<div class="col-md-6 offset-md-3 alert alert-danger text-center">Taille (Entre 2 et 20 caractères) ou format non valide (caractères autorisés : [A-Z a-z 0-9 . _ -]) !</div>';
+            $erreur .= '<div class="col-md-6 offset-md-3 alert alert-warning text-center">Taille (Entre 2 et 20 caractères) ou format non valide (caractères autorisés : [A-Z a-z 0-9 . _ -]) !</div>';
         }
 
         /*
@@ -39,7 +45,7 @@ if(isset($_POST['formulaire1']))
     // Si le format email est erroné, on entre dans la condition IF
     if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))
     {
-        $erreur .= '<div class="col-md-6 offset-md-3 alert alert-danger text-center">Format Email erroné!</div>';
+        $erreur .= '<div class="col-md-6 offset-md-3 alert alert-warning text-center">Format Email erroné!</div>';
     }
     else // Sinon le format est valide, in contrôle dans le else l'existence de l'email en BDD
     {
@@ -48,14 +54,14 @@ if(isset($_POST['formulaire1']))
         $verif_email->execute();
         if($verif_email->rowCount() > 0)
         {
-            $erreur .= '<div class="col-md-6 offset-md-3 alert alert-danger text-center">Email existant! <a href="connexion.php" class="alert-link">Connectez-vous</a> ou vérifiez vos identifiants!</div>';
+            $erreur .= '<div class="col-md-6 offset-md-3 alert alert-warning text-center">Email existant! <a href="connexion.php" class="alert-link">Connectez-vous</a> ou vérifiez vos identifiants!</div>';
         }
     }
 
     // VERIF MDP
     if($_POST['mdp'] !== $_POST['mdp_confirm'])
     {
-        $erreur .= '<div class="col-md-6 offset-md-3 alert alert-danger text-center">Vérifiez la confirmation du mot de passe!</div>';
+        $erreur .= '<div class="col-md-6 offset-md-3 alert alert-warning text-center">Vérifiez la confirmation du mot de passe!</div>';
     }
     
     $content .=$erreur;
@@ -76,7 +82,7 @@ if(isset($_POST['formulaire1']))
         // Les mots de passe ne sont jamais gardés en clair dans la BDD
         //password_hash() est une fonction préféfinie permettant de créer une clé de hachage
         // Pour comparer une clé de hachage avec une chaîne de caractères, au moment de la connexion, nous utiliserons password_verify()
-        $_POST['mdp'] = password_hash($_POST['mdp'], PASSWORD_DEFAULT);
+        // $_POST['mdp'] = password_hash($_POST['mdp'], PASSWORD_DEFAULT);
 
         $resultat = $bdd->query("SELECT * FROM membre");
 
@@ -142,8 +148,8 @@ require_once 'inc/header.php';
         <label for="civilite">Civilité</label>
         <select 
         type="text" class="form-control" id="civilite" name="civilite">
-            <option value="homme">Homme</option>
-            <option value="femme">Femme</option>
+            <option value="m">Homme</option>
+            <option value="f">Femme</option>
         </select>
     </div>
     <div class="form-group">
