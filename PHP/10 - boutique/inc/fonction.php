@@ -49,4 +49,54 @@ function internauteEstConnecteEtEstAdmin() // Cette fonction nous permet de savo
     }
 }
 
+//------ PANIER
+function creationDuPanier()
+{
+    if(!isset($_SESSION['panier'])) // Si l'indice panier dans la session n'est pas définie, c'est que l'internaute n'a pas ajouté de produit dans le panier, donc on créé le panier dans la session
+    {
+        // On créé un tableau ARRAY pour chaque indice, nous pouvons avoir plusieurs produits dans le panier
+        $_SESSION['panier'] = array();
+        $_SESSION['panier']['titre'] = array();
+        $_SESSION['panier']['id_produit'] = array();
+        $_SESSION['panier']['quantite'] = array();
+        $_SESSION['panier']['prix'] = array();
+    }
+}
+
+//---------------------------------------------------------
+function ajouterProduitDansPanier($titre, $id_produit, $quantite, $prix)
+{
+    creationDuPanier(); // On contrôle si le panier existe ou non dans la session
+
+    $position_produit = array_search($id_produit, $_SESSION['panier']['id_produit']);
+    //array_search() est une fonction prédéfinie qui retourne l'indice auquel se trouve l'id_produit dans la session 'panier'
+
+    // echo $position_produit;
+    if($position_produit !== false) // Si $position_produit est différent de false, cela veut dire que le produit a bien été trouvé dans la session 'panier'
+    {
+        $_SESSION['panier']['quantite'][$position_produit] += $quantite; // On ajoute la quantité à l'indice trouvé sans écraser la quantité précédente
+    }
+    else // Sinon l'id_produit n'est pas dans la session, on stock les données dans les différents tableaux
+    {
+    // On stock chaque donnée dans les différents tableaux de la session 'panier'
+    $_SESSION['panier']['titre'][] = $titre; // Les crochets vides permettent de générer des indices numériques par défaut pour les données
+    $_SESSION['panier']['id_produit'][] = $id_produit;
+    $_SESSION['panier']['quantite'][] = $quantite;
+    $_SESSION['panier']['prix'][] = $prix;
+    }
+}
+
+//-------------------------------------------------------------------
+function montantTotal()
+{
+    $total = 0;
+    // La boucle tourne tant qu'il y a l'id_produit dans la session
+    for($i = 0; $i < count($_SESSION['panier']['id_produit']); $i++)
+    {
+        $total += $_SESSION['panier']['quantite'][$i]*$_SESSION['panier']['prix'][$i]; // On multiplie la quantité par le prix pour chaque indice
+    }
+    return round($total, 2); // On retourne le total arrondie
+}
+
+
 ?>

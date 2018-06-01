@@ -198,7 +198,7 @@ while($employes = $resultat2->fetch(PDO::FETCH_ASSOC))
     {
         // echo '<pre>'; print_r($employes); echo '</pre>';
         echo '<tr>';
-        foreach($employes as $value)
+        foreach($pro as $value)
         {
             echo "<td>$value</td>";
         }
