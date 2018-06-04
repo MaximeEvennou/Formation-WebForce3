@@ -223,7 +223,7 @@ require_once '../inc/header.php';
 // debug($_FILES);
 ?>
 
-<!-- Réaliser un formulaire HTML correspondant à la table 'produit' de la BDD 'ecommerce' (saud le champs 'id_produit') -->
+<!-- Réaliser un formulaire HTML correspondant à la table 'produit' de la BDD 'ecommerce' (sauf le champs 'id_produit') -->
 
 <div class="list-group col-md-6 offset-md-3 text-center mt-4">
     <p class="list-group-item list-group-item-action active bg-info">

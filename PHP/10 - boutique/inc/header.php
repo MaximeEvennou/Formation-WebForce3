@@ -30,7 +30,10 @@
             echo '<li class="nav-item"><a class="nav-link" href="' . URL . 'boutique.php">Boutique</a></li>';
 
             echo '<li class="nav-item"><a class="nav-link" href="' . URL . 'panier.php">Panier</a></li>';
-
+            if(isset($_SESSION['panier']) && $_SESSION['panier']['quantite'] !== 0)
+            {
+             echo '<div class="badge badge-danger mt-2 mb-2">' . array_sum($_SESSION['panier']['quantite']) . '</div>';
+            }
             echo '<li class="nav-item"><a class="nav-link" href="' . URL . 'connexion.php?action=deconnexion">Déconnexion</a></li>';
           }
           else // Accès visiteur
@@ -41,8 +44,9 @@
 
             echo '<li class="nav-item"><a class="nav-link" href="' . URL . 'boutique.php">Boutique</a></li>';
 
-            echo '<li class="nav-item"><a class="nav-link" href="' . URL . 'panier.php">Panier</a></li>';
+            echo '<li class="nav-item"><a class="nav-link" href="' . URL . 'panier.php">Panier</a></li><div class="badge badge-danger mt-2 mb-2">' . array_sum($_SESSION['panier']['quantite']) . '</div>';
           }
+          
 
           if(internauteEstConnecteEtEstAdmin())
           {

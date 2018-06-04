@@ -95,8 +95,23 @@ function montantTotal()
     {
         $total += $_SESSION['panier']['quantite'][$i]*$_SESSION['panier']['prix'][$i]; // On multiplie la quantité par le prix pour chaque indice
     }
-    return round($total, 2); // On retourne le total arrondie
+    return round($total, 2); // On retourne le total arrondi
 }
 
+//-------------------------------------------------------------------
+function retirerProduitDuPanier($id_produit_a_supprimer)
+{
+    $position_produit = array_search($id_produit_a_supprimer, $_SESSION['panier']['id_produit']); // Grâce à la fonction array_search(), on va chercher à quel indice se trouve le produit à supprimer dans la session 'panier'
+
+    // La fonction array_spilce() permet de supprimer une ligne dans le tableau session et elle remonte les indices inférieursdu tableau aux indices supérieurs, si je supprime un produit à l'indice 4, tous les produits après l'indice 4 remontront tous d'un indice.
+    // Cela permet de réorganiser le tableau panier dans la session et de ne pas avoir d'indice vide.
+    if($position_produit !== false) // Si position_produit retourne une valeur différente de false, cela veut dire que l'indice a bien été trouvé dans la session 'panier'
+    {
+    array_splice($_SESSION['panier']['titre'], $position_produit, 1);
+    array_splice($_SESSION['panier']['quantite'], $position_produit, 1);
+    array_splice($_SESSION['panier']['id_produit'], $position_produit, 1);
+    array_splice($_SESSION['panier']['prix'], $position_produit, 1);
+    }
+}
 
 ?>

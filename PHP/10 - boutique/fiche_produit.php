@@ -42,7 +42,7 @@ if(isset($_GET['id_produit'])):
                         <label for="quantite">Quantité</label>
                         <select class="form-control" name="quantite" id="quantite">
                             <?php
-                            for($i = 1; $i <= $produit['stock'] && $i <= 5; $i++)
+                            for($i = 1; $i <= $produit['stock'] && $i <= 20; $i++)
                             {
                                 echo "<option>$i</option>";
                             }
