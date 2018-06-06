@@ -15,7 +15,7 @@
 <body>
 
     <nav class="navbar navbar-expand-sm navbar-dark bg-info">
-      <a class="navbar-brand" href="boutique.php">Ma Boutique</a>
+      <a class="navbar-brand" href="index.php">Ma Boutique</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -27,7 +27,7 @@
           { // Accès membre du site
             echo '<li class="nav-item"><a class="nav-link" href="' . URL . 'profil.php">Profil</a></li>';
 
-            echo '<li class="nav-item"><a class="nav-link" href="' . URL . 'boutique.php">Boutique</a></li>';
+            echo '<li class="nav-item"><a class="nav-link" href="' . URL . 'index.php">Boutique</a></li>';
 
             echo '<li class="nav-item"><a class="nav-link" href="' . URL . 'panier.php">Panier</a></li>';
             if(isset($_SESSION['panier']) && $_SESSION['panier']['quantite'] !== 0)
@@ -42,7 +42,7 @@
 
             echo '<li class="nav-item"><a class="nav-link" href="' . URL . 'connexion.php">Connexion</a></li>';
 
-            echo '<li class="nav-item"><a class="nav-link" href="' . URL . 'boutique.php">Boutique</a></li>';
+            echo '<li class="nav-item"><a class="nav-link" href="' . URL . 'index.php">Boutique</a></li>';
 
             echo '<li class="nav-item"><a class="nav-link" href="' . URL . 'panier.php">Panier</a></li><div class="badge badge-danger mt-2 mb-2">' . array_sum($_SESSION['panier']['quantite']) . '</div>';
           }

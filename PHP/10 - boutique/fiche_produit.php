@@ -10,7 +10,7 @@ if(isset($_GET['id_produit'])):
 
     if($resultat->rowCount() == 0) // Si le résultat est égal à 0, c'est qu'il n'y a aucun produit correspondant dans la BDD
     {
-        header("location:boutique.php"); // Redirection vers la boutique
+        header("location:index.php"); // Redirection vers la boutique
         exit(); // On stop l'exécution du script
     }
 
@@ -51,11 +51,11 @@ if(isset($_GET['id_produit'])):
                     </div>
                     <button type="submit" name="ajout_panier" value="valid_form" class="btn btn-info col-md-4 offset-md-4 mb-3 mt-3">Ajouter au panier</button>
                 </form>
-                <p class="text-center"><a href="boutique.php?categorie=<?= $produit['categorie'] ?>" class="alert-link text-info">Retour vers la catégorie de <?= $produit['categorie'] ?></a></p>
+                <p class="text-center"><a href="index.php?categorie=<?= $produit['categorie'] ?>" class="alert-link text-info">Retour vers la catégorie de <?= $produit['categorie'] ?></a></p>
 
             <?php else: ?>
                 <p class="text-danger text-center"><strong>RUPTURE DE STOCK</strong></p>
-                <p class="text-center"><a href="boutique.php?categorie=<?= $produit['categorie'] ?>" class="alert-link text-info">Retour vers la catégorie de <?= $produit['categorie'] ?></a></p>
+                <p class="text-center"><a href="index.php?categorie=<?= $produit['categorie'] ?>" class="alert-link text-info">Retour vers la catégorie de <?= $produit['categorie'] ?></a></p>
             <?php endif; ?>
           </div>
         </div>
